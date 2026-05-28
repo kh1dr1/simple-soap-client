@@ -1,26 +1,24 @@
 package lt.vikoeif.pi24.simple_soap_client;
 
 import lt.vikoeif.pi24.wsdl.Dealership;
+import lt.vikoeif.pi24.wsdl.GetAllDealershipsResponse;
+
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import lt.vikoeif.pi24.wsdl.GetAllDealershipsResponse;
-
-import java.util.List;
 
 @SpringBootApplication
 public class SimpleSoapClientApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SimpleSoapClientApplication.class, args);
-	}
+    }
 
     @Bean
     ApplicationRunner lookup(DealershipClient client) {
         return args -> {
-            // Parse command line args
+            // FIXME: Parse application command line args?
 //            List<String> dealershipOption = args.getOptionValues("dealership");
 //            String dealership =
 
