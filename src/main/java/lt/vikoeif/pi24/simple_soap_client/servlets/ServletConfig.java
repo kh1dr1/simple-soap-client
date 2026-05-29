@@ -37,6 +37,14 @@ public class ServletConfig {
     }
 
     @Bean
+    public ServletRegistrationBean<CreateDealershipServlet> createDealershipServlet() {
+        ServletRegistrationBean<CreateDealershipServlet> bean = new ServletRegistrationBean<>();
+        bean.setServlet(new CreateDealershipServlet());
+        bean.addUrlMappings("/post-create-dealership"); // Matches form's action
+        return bean;
+    }
+
+    @Bean
     public WebServerFactoryCustomizer<JettyServletWebServerFactory> jettyDirectoryListingCustomizer() {
         return factory -> factory.addServerCustomizers(server -> {
             ServletContextHandler context = server.getBean(ServletContextHandler.class);

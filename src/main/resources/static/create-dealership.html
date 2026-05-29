@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create a Dealership</title>
+    <style>
+        body { font-family: Arial,sans-serif; padding: 20px; }
+        a { display: block; margin: 50px 0; font-size: 18px; }
+
+        /* CSS class for form input boxes */
+        .form-row {
+            margin-bottom: 10px;
+        }
+        .form-row label {
+            display: inline-block;
+            width: 80px; /* Fixed width for alignment */
+        }
+        .form-row input {
+            display: inline-block;
+        }
+
+        /* CSS class for form Submit button */
+        .form-submit-button {
+            margin-top: 10px;
+        }
+        .form-submit-button input {
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Create a Dealership</h1>
+    <form action="/post-create-dealership" method="post">
+
+        <!-- Name: string -->
+        <div class="form-row">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+        </div>
+
+        <!-- Phone: string -->
+        <div class="form-row">
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone"><br>
+        </div>
+
+        <!-- Location: string -->
+        <div class="form-row">
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location"><br>
+        </div>
+
+        <!-- Submit button -->
+        <div class="form-submit-button">
+            <input type="submit" value="Create Dealership">
+        </div>
+
+        <!-- Get back to index.html -->
+        <a href="/index.html">Back to Main page</a>
+    </form>
+</body>
+
+</html>
