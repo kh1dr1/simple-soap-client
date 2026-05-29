@@ -8,9 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 import java.util.Map;
 
 public class HtmlFormServlet extends HttpServlet {
@@ -26,20 +23,20 @@ public class HtmlFormServlet extends HttpServlet {
         // NOTE: form action is registered at "/submit" URI
         out.println("""
                 <html><body>
-                
+               \s
                 <h1>Hello</h1>
-                
+               \s
                 <form action="/submit" method="post">
                   <label for="fname">First name:</label><br>
                   <input type="text" id="fname" name="fname"><br>
                   <label for="lname">Last name:</label><br>
                   <input type="text" id="lname" name="lname">
-                  
+                 \s
                   <!-- Submit button -->
                   <input type="submit" value="Submit Form">
-                  
+                 \s
                 </form>
-                
+               \s
                 </body></html>
         """);
 
@@ -63,27 +60,9 @@ public class HtmlFormServlet extends HttpServlet {
         String postData = requestBody.toString();
         System.out.println("Raw POST data: " + postData);
 
-        // Parse the parameters
-        Map<String, String> params = parsePostData(postData);
+        // Parse the POST parameters
+        Map<String, String> params = FormDataParser.parseHtmlPostData(postData);
         System.out.println("First Name: " + params.get("fname"));
         System.out.println("Last Name: " + params.get("lname"));
-    }
-
-    private Map<String, String> parsePostData(String postData) {
-        Map<String, String> params = new HashMap<>();
-        if (postData == null || postData.isEmpty()) {
-            return params;
-        }
-
-        String[] pairs = postData.split("&");
-        for (String pair : pairs) {
-            String[] keyValue = pair.split("=");
-            if (keyValue.length == 2) {
-                String key = URLDecoder.decode(keyValue[0], StandardCharsets.UTF_8);
-                String value = URLDecoder.decode(keyValue[1], StandardCharsets.UTF_8);
-                params.put(key, value);
-            }
-        }
-        return params;
     }
 }
