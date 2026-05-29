@@ -22,11 +22,11 @@ public class SimpleSoapClientApplication {
 //            List<String> dealershipOption = args.getOptionValues("dealership");
 //            String dealership =
 
-            GetAllDealershipsResponse response = client.getAllDealerships();
+            /*GetAllDealershipsResponse response = client.getAllDealerships();
             System.out.println("All dealerships are:");
             for (Dealership dealership : response.getDealerships()) {
                 System.out.println(dealershipToString(dealership));
-            }
+            }*/
         };
     }
 
