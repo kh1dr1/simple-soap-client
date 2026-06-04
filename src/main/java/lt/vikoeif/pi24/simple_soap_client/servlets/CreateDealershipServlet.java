@@ -4,10 +4,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lt.vikoeif.pi24.simple_soap_client.DealershipClient;
+import lt.vikoeif.pi24.simple_soap_client.Logger;
 import lt.vikoeif.pi24.simple_soap_client.WsdlUtils;
 import lt.vikoeif.pi24.wsdl.AddDealershipResponse;
 import lt.vikoeif.pi24.wsdl.Dealership;
-import lt.vikoeif.pi24.wsdl.GetDealershipCountResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -60,15 +60,12 @@ public class CreateDealershipServlet extends HttpServlet {
                 .getDealershipCount()
                 .getCount();
 
+        Logger.logVerboseMessage("Current Dealership count",
+                "Current Dealership count: " + dealershipCount
+        );
+
         // Create a dealership object
         Dealership dealership = new Dealership();
-
-        /*
-            NOTE: ID field has no effect, as the database will generate a
-            different ID for a new Dealership. But this field is necessary
-            when sending a SOAP request.
-         */
-        dealership.setId(dealershipCount + 1);
         dealership.setName(dealershipName);
         dealership.setPhone(dealershipPhone);
         dealership.setLocation(dealershipLocation);
@@ -76,10 +73,11 @@ public class CreateDealershipServlet extends HttpServlet {
         // Send a SOAP message to the server
         AddDealershipResponse response = dealershipClient.addDealership(dealership);
         if (response.isSuccess()) {
-            System.out.println("Created a new Dealership:");
-            System.out.println(WsdlUtils.dealershipToString(dealership));
+            Logger.logVerboseMessage("Created a new Dealership",
+                    WsdlUtils.dealershipToString(dealership)
+            );
         } else {
-            System.out.println("error: cannot create a Dealership");
+            Logger.logVerboseMessage("ERROR", "Cannot create a Dealership");
         }
     }
 }
