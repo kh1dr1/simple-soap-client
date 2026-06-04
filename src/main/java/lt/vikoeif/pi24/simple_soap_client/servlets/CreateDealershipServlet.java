@@ -41,19 +41,24 @@ public class CreateDealershipServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
 
         // Generate response page
-        out.println("<!DOCTYPE html>");
-        out.println("<html>");
-        out.println("<head><title>Form Submitted</title></head>");
-        out.println("<body>");
-        out.println("<h1>Name: " + dealershipName + "</h1>");
-        out.println("<p>Information:</p>");
-        out.println("<ul>");
-        out.println("<li>Phone: " + dealershipPhone + "</li>");
-        out.println("<li>Location: " + dealershipLocation + "</li>");
-        out.println("</ul>");
-        out.println("<a href='/create-dealership.html'>Back to Form</a>");
-        out.println("</body>");
-        out.println("</html>");
+        out.printf("""
+            <!DOCTYPE html>
+            <html lang='en-US'>
+            <head>
+                <title>Dealership Created</title>
+                <meta charset='UTF-8'>
+            </head>
+            <body>
+                <h1>Dealership: %s</h1>
+                <p>Information:</p>
+                <ul>
+                    <li>Phone: %s</li>
+                    <li>Location: %s</li>
+                </ul>
+                <a href='/create-dealership.html'>Create Another</a>
+                <a href='/index.html'>Back to Main</a>
+            </body>
+        """, dealershipName, dealershipPhone, dealershipLocation);
 
         // Get last dealership ID
         int dealershipCount = dealershipClient
