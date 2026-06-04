@@ -8,17 +8,35 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 @Configuration
 public class DealershipConfig {
 
+    /**
+     * Spring Bean method which sets up a JAXB marshaller for SOAP operations.
+     * A JAXB marshaller is necessary to convert Java objects to XML
+     * before they are sent in a SOAP message.
+     * @return Jaxb2Marshaller
+     */
     @Bean
     public Jaxb2Marshaller marshaller() {
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-        // this package must match the package configured in the pom.xml
+
+        /*
+            This package must match the package configured in the pom.xml.
+            This is where JAXB-generated classes live.
+         */
         marshaller.setContextPath("lt.vikoeif.pi24.wsdl");
         return marshaller;
     }
 
+    /**
+     * Spring Bean method which configures the SOAP service client.
+     * The DealershipClient is configured to use the correct web service URI.
+     * @param builder WebServiceTemplateBuilder
+     * @param marshaller Jaxb2Marshaller
+     * @return DealershipClient
+     */
     @Bean
     public DealershipClient getDealershipClient(
-            WebServiceTemplateBuilder builder, Jaxb2Marshaller marshaller
+            WebServiceTemplateBuilder builder,
+            Jaxb2Marshaller marshaller
     ) {
         builder = builder.setMarshaller(marshaller).setUnmarshaller(marshaller);
 
