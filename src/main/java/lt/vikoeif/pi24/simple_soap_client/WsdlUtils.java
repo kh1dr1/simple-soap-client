@@ -53,12 +53,18 @@ public final class WsdlUtils {
      * @return String
      */
     public static String dealershipToString(Dealership dealership) {
+        String inventoryString = "null";
+        Dealership.Inventory dealershipInventory = dealership.getInventory();
+        if (dealershipInventory != null) {
+            inventoryString = dealershipInventoryToString(dealershipInventory, 2);
+        }
+
         return "Dealership {\n" +
                 "  ID: " + dealership.getId() + ";\n" +
                 "  Name: " + dealership.getName() + ";\n" +
                 "  Location: " + dealership.getLocation() + ";\n" +
                 "  Phone: " + dealership.getPhone() + ";\n" +
-                "  Inventory: " + dealershipInventoryToString(dealership.getInventory(), 2) + ";\n" +
+                "  Inventory: " + inventoryString + ";\n" +
                 "}";
     }
 }
