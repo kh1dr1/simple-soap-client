@@ -48,6 +48,16 @@ public class ServletConfig {
     }
 
     @Bean
+    public ServletRegistrationBean<GetDealershipServlet> getDealershipServlet(
+        DealershipClient dealershipClient
+    ) {
+        ServletRegistrationBean<GetDealershipServlet> bean = new ServletRegistrationBean<>();
+        bean.setServlet(new GetDealershipServlet(dealershipClient));
+        bean.addUrlMappings("/get-dealership");
+        return bean;
+    }
+
+    @Bean
     public WebServerFactoryCustomizer<JettyServletWebServerFactory> jettyDirectoryListingCustomizer() {
         return factory -> factory.addServerCustomizers(server -> {
             ServletContextHandler context = server.getBean(ServletContextHandler.class);
