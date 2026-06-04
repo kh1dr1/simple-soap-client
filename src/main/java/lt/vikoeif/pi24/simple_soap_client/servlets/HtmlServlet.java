@@ -1,6 +1,5 @@
 package lt.vikoeif.pi24.simple_soap_client.servlets;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,7 +13,7 @@ public class HtmlServlet extends HttpServlet {
     protected void doGet(
             HttpServletRequest req,
             HttpServletResponse resp
-    ) throws ServletException, IOException {
+    ) throws IOException {
         PrintWriter out = resp.getWriter();
         out.println("<html><body>");
         out.println("<h1> Hello </h1>");

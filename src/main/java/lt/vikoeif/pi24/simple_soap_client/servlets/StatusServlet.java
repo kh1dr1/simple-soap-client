@@ -1,6 +1,5 @@
 package lt.vikoeif.pi24.simple_soap_client.servlets;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,7 +12,7 @@ public class StatusServlet extends HttpServlet {
     protected void doGet(
             HttpServletRequest request,
             HttpServletResponse response
-    ) throws ServletException, IOException {
+    ) throws IOException {
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().println("{ \"status\": \"running\" }");

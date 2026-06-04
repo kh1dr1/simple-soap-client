@@ -1,6 +1,5 @@
 package lt.vikoeif.pi24.simple_soap_client.servlets;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,7 +22,7 @@ public class CreateDealershipServlet extends HttpServlet {
     protected void doPost(
             HttpServletRequest req,
             HttpServletResponse resp
-    ) throws ServletException, IOException {
+    ) throws IOException {
 
         // Get form data from POST request
         String dealershipName = req.getParameter("name");

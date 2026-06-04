@@ -1,6 +1,5 @@
 package lt.vikoeif.pi24.simple_soap_client.servlets;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,7 +15,7 @@ public class HtmlFormServlet extends HttpServlet {
     protected void doGet(
             HttpServletRequest req,
             HttpServletResponse resp
-    ) throws ServletException, IOException {
+    ) throws IOException {
         PrintWriter out = resp.getWriter();
 
         // Return HTML form string
@@ -47,7 +46,7 @@ public class HtmlFormServlet extends HttpServlet {
     protected void doPost(
             HttpServletRequest req,
             HttpServletResponse resp
-    ) throws ServletException, IOException {
+    ) throws IOException {
         BufferedReader in = req.getReader();
 
         // Read all lines
