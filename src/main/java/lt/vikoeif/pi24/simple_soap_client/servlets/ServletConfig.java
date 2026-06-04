@@ -1,5 +1,6 @@
 package lt.vikoeif.pi24.simple_soap_client.servlets;
 
+import lt.vikoeif.pi24.simple_soap_client.DealershipClient;
 import org.eclipse.jetty.ee11.servlet.DefaultServlet;
 import org.eclipse.jetty.ee11.servlet.ServletContextHandler;
 import org.eclipse.jetty.ee11.servlet.ServletHolder;
@@ -37,11 +38,13 @@ public class ServletConfig {
     }
 
     @Bean
-    public ServletRegistrationBean<CreateDealershipServlet> createDealershipServlet() {
-        ServletRegistrationBean<CreateDealershipServlet> bean = new ServletRegistrationBean<>();
-        bean.setServlet(new CreateDealershipServlet());
-        bean.addUrlMappings("/post-create-dealership"); // Matches form's action
-        return bean;
+    public ServletRegistrationBean<CreateDealershipServlet> createDealershipServlet(
+            DealershipClient dealershipClient
+    ) {
+        CreateDealershipServlet servlet = new CreateDealershipServlet(dealershipClient);
+
+        // NOTE: URL mapping must match HTML form's action
+        return new ServletRegistrationBean<>(servlet, "/post-create-dealership");
     }
 
     @Bean
