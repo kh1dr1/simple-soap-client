@@ -1,8 +1,6 @@
 package lt.vikoeif.pi24.simple_soap_client;
 
-import lt.vikoeif.pi24.wsdl.AddDealershipResponse;
-import lt.vikoeif.pi24.wsdl.Dealership;
-import lt.vikoeif.pi24.wsdl.GetAllDealershipsResponse;
+import lt.vikoeif.pi24.wsdl.*;
 
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,11 +22,11 @@ public class SimpleSoapClientApplication {
 //            List<String> dealershipOption = args.getOptionValues("dealership");
 //            String dealership =
 
-            /*GetAllDealershipsResponse response = client.getAllDealerships();
+            GetAllDealershipsResponse response = client.getAllDealerships();
             System.out.println("All dealerships are:");
             for (Dealership dealership : response.getDealerships()) {
-                System.out.println(dealershipToString(dealership));
-            }*/
+                System.out.println(WsdlUtils.dealershipToString(dealership));
+            }
         };
     }
 
@@ -48,13 +46,4 @@ public class SimpleSoapClientApplication {
             System.out.println("\nAddDealershipResponse status: " + response.isSuccess() + "\n");
         };
     }*/
-
-    private static String dealershipToString(Dealership dealership) {
-        return "Dealership {\n" +
-                "  ID: " + dealership.getId() + ";\n" +
-                "  Name: " + dealership.getName() + ";\n" +
-                "  Location: " + dealership.getLocation() + ";\n" +
-                "  Phone: " + dealership.getPhone() + ";\n" +
-                "}";
-    }
 }
