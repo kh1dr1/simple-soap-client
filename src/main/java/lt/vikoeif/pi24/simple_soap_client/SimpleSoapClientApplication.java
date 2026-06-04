@@ -1,11 +1,16 @@
 package lt.vikoeif.pi24.simple_soap_client;
 
 import lt.vikoeif.pi24.wsdl.*;
+import lt.vikoeif.pi24.simple_soap_client.xslgen.DealershipHtmlGenerator;
 
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
 @SpringBootApplication
 public class SimpleSoapClientApplication {
@@ -22,11 +27,61 @@ public class SimpleSoapClientApplication {
 //            List<String> dealershipOption = args.getOptionValues("dealership");
 //            String dealership =
 
+            // Print dealerships
+            // =================
+
             GetAllDealershipsResponse response = client.getAllDealerships();
-            System.out.println("All dealerships are:");
-            for (Dealership dealership : response.getDealerships()) {
+            List<Dealership> dealershipList = response.getDealerships();
+
+            Logger.logTitle("All Dealerships");
+            for (Dealership dealership : dealershipList) {
                 System.out.println(WsdlUtils.dealershipToString(dealership));
             }
+            System.out.println("Dealership count: " + dealershipList.size());
+
+            // Test JAXB marshaller
+            // ====================
+
+            Dealership dealership = new Dealership();
+            dealership.setId(123);
+            dealership.setName("Downtown Vegas Wheels");
+            dealership.setPhone("123-456-7890");
+            dealership.setLocation("Las Vegas");
+
+            Dealership.Inventory inventory = new Dealership.Inventory();
+
+            Car car1 = new Car();
+            car1.setId(1);
+            car1.setBrand("Toyota");
+            car1.setModel("Camry");
+            car1.setYear(2020);
+
+            Car car2 = new Car();
+            car2.setId(2);
+            car2.setBrand("Toyota");
+            car2.setModel("Corolla");
+            car2.setYear(2015);
+
+            Car car3 = new Car();
+            car3.setId(3);
+            car3.setBrand("Honda");
+            car3.setModel("Civic");
+            car3.setYear(2021);
+
+            inventory.getCar().add(car1);
+            inventory.getCar().add(car2);
+            inventory.getCar().add(car3);
+
+            dealership.setInventory(inventory);
+
+            String htmlDealership = DealershipHtmlGenerator.dealershipToHtml(dealership);
+            Logger.logVerboseMessage("Marshalled Dealership Example",
+                    htmlDealership
+            );
+
+            // Output to file (quick test)
+//            Files.write(Paths.get("output.html"), htmlDealership.getBytes());
+//            System.out.println("html Dealership saved to output.html");
         };
     }
 
