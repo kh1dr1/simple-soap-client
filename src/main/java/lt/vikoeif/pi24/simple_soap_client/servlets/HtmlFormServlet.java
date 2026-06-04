@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Map;
 
 public class HtmlFormServlet extends HttpServlet {
 
@@ -47,6 +46,16 @@ public class HtmlFormServlet extends HttpServlet {
             HttpServletRequest req,
             HttpServletResponse resp
     ) throws IOException {
+
+        // Get the POST parameters
+        String firstName = req.getParameter("fname");
+        String lastName = req.getParameter("lname");
+
+        /*
+            The following code is just an example of how you could get raw
+            POST string (but that is not necessary for getting form parameters,
+            as we have the HttpServletRequest.getParameter method).
+         */
         BufferedReader in = req.getReader();
 
         // Read all lines
@@ -59,9 +68,8 @@ public class HtmlFormServlet extends HttpServlet {
         String postData = requestBody.toString();
         System.out.println("Raw POST data: " + postData);
 
-        // Parse the POST parameters
-        Map<String, String> params = FormDataParser.parseHtmlPostData(postData);
-        System.out.println("First Name: " + params.get("fname"));
-        System.out.println("Last Name: " + params.get("lname"));
+        // Log POST parameters
+        System.out.println("First Name: " + firstName);
+        System.out.println("Last Name: " + lastName);
     }
 }
