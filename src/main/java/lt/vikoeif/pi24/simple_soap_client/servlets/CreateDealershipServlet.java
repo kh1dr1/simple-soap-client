@@ -62,7 +62,7 @@ public class CreateDealershipServlet extends HttpServlet {
             different ID for a new Dealership. But this field is necessary
             when sending a SOAP request.
          */
-        dealership.setId(1);
+        dealership.setId(10000);
         dealership.setName(dealershipName);
         dealership.setPhone(dealershipPhone);
         dealership.setLocation(dealershipLocation);
