@@ -1,5 +1,6 @@
 package lt.vikoeif.pi24.simple_soap_client;
 
+import lt.vikoeif.pi24.wsdl.AddDealershipResponse;
 import lt.vikoeif.pi24.wsdl.Dealership;
 import lt.vikoeif.pi24.wsdl.GetAllDealershipsResponse;
 
@@ -15,6 +16,7 @@ public class SimpleSoapClientApplication {
 		SpringApplication.run(SimpleSoapClientApplication.class, args);
     }
 
+    // Testing that the "getAllDealerships" method works
     @Bean
     ApplicationRunner lookup(DealershipClient client) {
         return args -> {
@@ -29,6 +31,23 @@ public class SimpleSoapClientApplication {
             }*/
         };
     }
+
+    // Testing that the "addDealership" SOAP method works
+    /*@Bean
+    ApplicationRunner create(DealershipClient client) {
+        return args -> {
+
+            // Mock a dealership
+            Dealership dealership = new Dealership();
+            dealership.setId(1);
+            dealership.setName("New City Motors");
+            dealership.setPhone("111-333-7777");
+            dealership.setLocation("Los Angeles");
+
+            AddDealershipResponse response = client.addDealership(dealership);
+            System.out.println("\nAddDealershipResponse status: " + response.isSuccess() + "\n");
+        };
+    }*/
 
     private static String dealershipToString(Dealership dealership) {
         return "Dealership {\n" +
