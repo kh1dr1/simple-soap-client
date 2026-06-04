@@ -22,6 +22,20 @@ public class DealershipClient extends WebServiceGatewaySupport {
     }
 
     /**
+     * Get number of dealerships
+     * @return GetDealershipCountResponse
+     */
+    public GetDealershipCountResponse getDealershipCount() {
+        GetDealershipCountRequest request = new GetDealershipCountRequest();
+        
+        return (GetDealershipCountResponse)
+                getWebServiceTemplate().marshalSendAndReceive(
+                        WS_REQUEST_URI,
+                        request
+                );
+    }
+
+    /**
      * Create a dealership
      * @param dealership the dealership object data
      * @return AddDealershipResponse
