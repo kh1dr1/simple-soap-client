@@ -43,7 +43,7 @@ public class SimpleSoapClientApplication {
             // ====================
 
             Dealership dealership = new Dealership();
-            dealership.setId(123);
+            dealership.setId(1);
             dealership.setName("Downtown Vegas Wheels");
             dealership.setPhone("123-456-7890");
             dealership.setLocation("Las Vegas");
@@ -74,14 +74,18 @@ public class SimpleSoapClientApplication {
 
             dealership.setInventory(inventory);
 
-            String htmlDealership = DealershipHtmlGenerator.dealershipToHtml(dealership);
-            Logger.logVerboseMessage("Marshalled Dealership Example",
-                    htmlDealership
-            );
+            // Add this data to the database
+            AddDealershipResponse dealershipResponse = client.addDealership(dealership);
+            if (dealershipResponse.isSuccess()) {
+                Logger.logVerboseMessage(
+                        "Successfully added __TEST__ dealership data",
+                        "Data: " + WsdlUtils.dealershipToString(dealership)
+                );
+            } else {
+                Logger.logVerboseMessage("ERROR: could not add __TEST__ dealership data");
+            }
 
-            // Output to file (quick test)
-//            Files.write(Paths.get("output.html"), htmlDealership.getBytes());
-//            System.out.println("html Dealership saved to output.html");
+            Logger.logTitle("App initialization has completed");
         };
     }
 
