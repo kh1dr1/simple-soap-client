@@ -1,0 +1,5 @@
+id,description,status,datetime_created,datetime_modified
+1,Update SOAP client with new WSDL,pending,Sat Aug 15 15:45:20 2026,Sat Aug 15 15:45:20 2026
+2,"Use Spring MVC Controller instead of a raw servlet for ""addDealership"" (@Controller + @PostMapping)",pending,Sat Aug 15 15:46:11 2026,Sat Aug 15 15:46:11 2026
+3,Add XSLT transformation: XML --> PDF,pending,Sat Aug 15 15:46:29 2026,Sat Aug 15 15:46:29 2026
+4,PDF generation with Apache FOP - PDF must have an embedded image,pending,Sat Aug 15 15:46:59 2026,Sat Aug 15 15:46:59 2026
