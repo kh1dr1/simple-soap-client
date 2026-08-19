@@ -7,18 +7,23 @@ import lt.viko.eif.pi24.dealership_service.schema.*;
 public class DealershipEndpointClient extends WebServiceGatewaySupport {
     public final String WS_REQUEST_URI = "http://localhost:8080/ws";
 
+    public GetDealershipByIdResponse getDealershipById(int id) {
+        GetDealershipByIdRequest request = new GetDealershipByIdRequest();
+        request.setId(id);
+
+        return (GetDealershipByIdResponse) getWebServiceTemplate()
+                .marshalSendAndReceive(WS_REQUEST_URI, request);
+    }
+
     /**
-     * Get a list of all dealerships
-     * @return GetAllDealershipsResponse
+     * Send a SOAP request to get a list of all Dealerships in the database
+     * @return {@code GetAllDealershipsResponse} with a List of Dealerships
      */
     public GetAllDealershipsResponse getAllDealerships() {
         GetAllDealershipsRequest request = new GetAllDealershipsRequest();
 
-        return (GetAllDealershipsResponse)
-                getWebServiceTemplate().marshalSendAndReceive(
-                        WS_REQUEST_URI,
-                        request
-                );
+        return (GetAllDealershipsResponse) getWebServiceTemplate()
+                .marshalSendAndReceive(WS_REQUEST_URI, request);
     }
 
 //    /**
@@ -36,18 +41,15 @@ public class DealershipEndpointClient extends WebServiceGatewaySupport {
 //    }
 
     /**
-     * Create a dealership
-     * @param dealership the dealership object data
-     * @return AddDealershipResponse
+     * Send a SOAP request to insert a Dealership into the database
+     * @param xsdDealership XSD Dealership POJO
+     * @return {@code AddDealershipResponse} with a boolean success flag
      */
-    public AddDealershipResponse addDealership(Dealership dealership) {
+    public AddDealershipResponse addDealership(Dealership xsdDealership) {
         AddDealershipRequest request = new AddDealershipRequest();
-        request.setDealership(dealership);
+        request.setDealership(xsdDealership);
 
-        return (AddDealershipResponse)
-                getWebServiceTemplate().marshalSendAndReceive(
-                        WS_REQUEST_URI,
-                        request
-                );
+        return (AddDealershipResponse) getWebServiceTemplate()
+                .marshalSendAndReceive(WS_REQUEST_URI, request);
     }
 }
