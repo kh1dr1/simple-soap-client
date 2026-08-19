@@ -1,9 +1,11 @@
 package lt.vikoeif.pi24.simple_soap_client.servlets;
 
-import lt.vikoeif.pi24.simple_soap_client.DealershipClient;
+import lt.vikoeif.pi24.simple_soap_client.endpoint.DealershipEndpointClient;
+
 import org.eclipse.jetty.ee11.servlet.DefaultServlet;
 import org.eclipse.jetty.ee11.servlet.ServletContextHandler;
 import org.eclipse.jetty.ee11.servlet.ServletHolder;
+
 import org.springframework.boot.jetty.servlet.JettyServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -39,9 +41,9 @@ public class ServletConfig {
 
     @Bean
     public ServletRegistrationBean<CreateDealershipServlet> createDealershipServlet(
-            DealershipClient dealershipClient
+            DealershipEndpointClient dealershipEndpointClient
     ) {
-        CreateDealershipServlet servlet = new CreateDealershipServlet(dealershipClient);
+        CreateDealershipServlet servlet = new CreateDealershipServlet(dealershipEndpointClient);
 
         // NOTE: URL mapping must match HTML form's action
         return new ServletRegistrationBean<>(servlet, "/post-create-dealership");
@@ -49,10 +51,10 @@ public class ServletConfig {
 
     @Bean
     public ServletRegistrationBean<GetDealershipServlet> getDealershipServlet(
-        DealershipClient dealershipClient
+        DealershipEndpointClient dealershipEndpointClient
     ) {
         ServletRegistrationBean<GetDealershipServlet> bean = new ServletRegistrationBean<>();
-        bean.setServlet(new GetDealershipServlet(dealershipClient));
+        bean.setServlet(new GetDealershipServlet(dealershipEndpointClient));
         bean.addUrlMappings("/get-dealership");
         return bean;
     }

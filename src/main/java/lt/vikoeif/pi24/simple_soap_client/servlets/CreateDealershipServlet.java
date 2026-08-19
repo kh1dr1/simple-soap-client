@@ -3,21 +3,23 @@ package lt.vikoeif.pi24.simple_soap_client.servlets;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lt.vikoeif.pi24.simple_soap_client.DealershipClient;
-import lt.vikoeif.pi24.simple_soap_client.Logger;
-import lt.vikoeif.pi24.simple_soap_client.WsdlUtils;
-import lt.vikoeif.pi24.wsdl.AddDealershipResponse;
-import lt.vikoeif.pi24.wsdl.Dealership;
+
+import lt.vikoeif.pi24.simple_soap_client.endpoint.DealershipEndpointClient;
+import lt.viko.eif.pi24.dealership_service.schema.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class CreateDealershipServlet extends HttpServlet {
+    private static final Logger _logger = LoggerFactory.getLogger(CreateDealershipServlet.class);
 
-    private final DealershipClient dealershipClient;
+    private final DealershipEndpointClient dealershipEndpointClient;
 
-    public CreateDealershipServlet(DealershipClient dealershipClient) {
-        this.dealershipClient = dealershipClient;
+    public CreateDealershipServlet(DealershipEndpointClient dealershipEndpointClient) {
+        this.dealershipEndpointClient = dealershipEndpointClient;
     }
 
     @Override
@@ -31,10 +33,15 @@ public class CreateDealershipServlet extends HttpServlet {
         String dealershipPhone = req.getParameter("phone");
         String dealershipLocation = req.getParameter("location");
 
-        System.out.println("===== HTTP POST data =====");
-        System.out.println("Dealership name: " + dealershipName);
-        System.out.println("Dealership phone: " + dealershipPhone);
-        System.out.println("Dealership location: " + dealershipLocation + "\n");
+        _logger.info("""
+                ===== HTTP POST data =====
+                Dealership name: {}
+                Dealership phone: {}
+                Dealership location: {}
+                """,
+                dealershipName,
+                dealershipPhone,
+                dealershipLocation);
 
         // Set response content type
         resp.setContentType("text/html");
@@ -60,29 +67,19 @@ public class CreateDealershipServlet extends HttpServlet {
             </body>
         """, dealershipName, dealershipPhone, dealershipLocation);
 
-        // Get last dealership ID
-        int dealershipCount = dealershipClient
-                .getDealershipCount()
-                .getCount();
-
-        Logger.logVerboseMessage("Current Dealership count",
-                "Current Dealership count: " + dealershipCount
-        );
-
         // Create a dealership object
         Dealership dealership = new Dealership();
+        dealership.setId(0);
         dealership.setName(dealershipName);
         dealership.setPhone(dealershipPhone);
         dealership.setLocation(dealershipLocation);
 
         // Send a SOAP message to the server
-        AddDealershipResponse response = dealershipClient.addDealership(dealership);
+        AddDealershipResponse response = dealershipEndpointClient.addDealership(dealership);
         if (response.isSuccess()) {
-            Logger.logVerboseMessage("Created a new Dealership",
-                    WsdlUtils.dealershipToString(dealership)
-            );
+            _logger.info("Created a new Dealership with ID: {}", dealership.getId());
         } else {
-            Logger.logVerboseMessage("ERROR", "Cannot create a Dealership");
+            _logger.warn("Cannot create a Dealership");
         }
     }
 }

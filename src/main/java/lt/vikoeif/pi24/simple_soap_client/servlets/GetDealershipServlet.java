@@ -4,19 +4,23 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import lt.vikoeif.pi24.simple_soap_client.DealershipClient;
-import lt.vikoeif.pi24.simple_soap_client.Logger;
-import lt.vikoeif.pi24.simple_soap_client.WsdlUtils;
+import lt.viko.eif.pi24.dealership_service.schema.Dealership;
+import lt.viko.eif.pi24.dealership_service.schema.GetDealershipByIdResponse;
+import lt.vikoeif.pi24.simple_soap_client.endpoint.DealershipEndpointClient;
 import lt.vikoeif.pi24.simple_soap_client.xslgen.DealershipHtmlGenerator;
-import lt.vikoeif.pi24.wsdl.*;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 public class GetDealershipServlet extends HttpServlet {
-    private final DealershipClient dealershipClient;
+    private static final Logger _logger = LoggerFactory.getLogger(GetDealershipServlet.class);
 
-    public GetDealershipServlet(DealershipClient dealershipClient) {
-        this.dealershipClient = dealershipClient;
+    private final DealershipEndpointClient dealershipEndpointClient;
+
+    public GetDealershipServlet(DealershipEndpointClient dealershipEndpointClient) {
+        this.dealershipEndpointClient = dealershipEndpointClient;
     }
 
     @Override
@@ -46,18 +50,18 @@ public class GetDealershipServlet extends HttpServlet {
             return;
         }
 
-        // SOAP request: get Dealership by ID
-        Dealership dealership = getDealershipById(idNumber);
+        // Send SOAP request: 'getDealershipById'
+        GetDealershipByIdResponse response = dealershipEndpointClient.getDealershipById(idNumber);
+        Dealership dealership = response.getDealership();
+
         if (dealership == null) {
-            System.out.println("There is no such dealership: ID=" + idNumber);
+            _logger.warn("There is no Dealership with ID={}", idNumber);
             return;
         }
 
-        Logger.logVerboseMessage("Received a Dealership by ID: " + idNumber,
-                WsdlUtils.dealershipToString(dealership)
-        );
+        _logger.info("Received a Dealership with ID={}", idNumber);
 
-        // Convert to HTML code via XSLT
+        // Convert Dealership XML to HTML with XSL transformation
         String htmlDealership;
         try {
             htmlDealership = DealershipHtmlGenerator.dealershipToHtml(dealership);
@@ -66,16 +70,8 @@ public class GetDealershipServlet extends HttpServlet {
             return;
         }
 
-        // Use HTML code as response
+        // Send HTML as response
         resp.setContentType("text/html");
         resp.getWriter().write(htmlDealership);
-    }
-
-    // FIXME: should be in a separate helper class, probably
-    private Dealership getDealershipById(int id) {
-        GetAllDealershipsResponse request = dealershipClient.getAllDealerships();
-        return request.getDealerships().stream()
-                .filter(d -> d.getId() == id)
-                .findFirst().orElse(null);
     }
 }
