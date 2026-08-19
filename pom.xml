@@ -101,10 +101,11 @@
 
                     <!-- Tells wsimport which package to put all generated classes into
                          If such directory does not exist, it will be generated. -->
-                    <packageName>lt.vikoeif.pi24.wsdl</packageName>
+                    <packageName>lt.viko.eif.pi24.dealership_service.schema</packageName>
 
                     <!-- Where to output all generated classes -->
-                    <sourceDestDir>${project.build.directory}/generated-sources/jaxws</sourceDestDir>
+<!--                    <sourceDestDir>${project.build.directory}/generated-sources/jaxws</sourceDestDir>-->
+                    <sourceDestDir>src/main/java</sourceDestDir>
                 </configuration>
             </plugin>
         </plugins>

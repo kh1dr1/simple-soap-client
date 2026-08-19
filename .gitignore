@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### JAXB generated classes ###
+/src/main/java/lt/viko/eif/pi24/dealership_service/schema/*
+
