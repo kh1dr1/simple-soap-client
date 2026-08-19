@@ -5,3 +5,7 @@ id,description,status,datetime_created,datetime_modified
 4,PDF generation with Apache FOP - PDF must have an embedded image,pending,Sat Aug 15 15:46:59 2026,Sat Aug 15 15:46:59 2026
 5,Refactor endpoint classes: Move all code to package 'endpoint',completed,Wed Aug 19 21:17:50 2026,Wed Aug 19 21:24:16 2026
 6,Delete old Logger class. Use slf4j framework.,pending,Wed Aug 19 21:19:09 2026,Wed Aug 19 21:19:09 2026
+7,Delete class 'WsdlUtils' - it is useless,deleted,Wed Aug 19 21:54:29 2026,Wed Aug 19 22:18:31 2026
+8,Add HTML form page for 'addCar' operation,pending,Wed Aug 19 22:05:27 2026,Wed Aug 19 22:06:21 2026
+9,Add HTML form page for 'getAllCars' operation,pending,Wed Aug 19 22:06:42 2026,Wed Aug 19 22:06:42 2026
+10,Add HTML form page for 'getAllDealerships' operation,pending,Wed Aug 19 22:17:58 2026,Wed Aug 19 22:17:58 2026
