@@ -1,8 +1,9 @@
 package lt.vikoeif.pi24.simple_soap_client.xslgen;
 
 import jakarta.xml.bind.JAXBElement;
+
 import lt.vikoeif.pi24.simple_soap_client.Logger;
-import lt.vikoeif.pi24.wsdl.Dealership;
+import lt.viko.eif.pi24.dealership_service.schema.*;
 
 import javax.xml.namespace.QName;
 import javax.xml.transform.*;
