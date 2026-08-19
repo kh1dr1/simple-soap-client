@@ -96,7 +96,7 @@
                 <configuration>
                     <wsdlUrls>
                         <!-- URL address of WSDL file -->
-                        <wsdlUrl>http://localhost:8081/ws/dealerships?wsdl</wsdlUrl>
+                        <wsdlUrl>http://localhost:8080/ws/dealerships.wsdl</wsdlUrl>
                     </wsdlUrls>
 
                     <!-- Tells wsimport which package to put all generated classes into
