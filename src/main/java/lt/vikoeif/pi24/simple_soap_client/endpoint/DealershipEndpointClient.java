@@ -1,11 +1,11 @@
-package lt.vikoeif.pi24.simple_soap_client;
+package lt.vikoeif.pi24.simple_soap_client.endpoint;
 
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 
-import lt.vikoeif.pi24.wsdl.*;
+import lt.viko.eif.pi24.dealership_service.schema.*;
 
-public class DealershipClient extends WebServiceGatewaySupport {
-    public final String WS_REQUEST_URI = "http://localhost:8081/ws/dealerships";
+public class DealershipEndpointClient extends WebServiceGatewaySupport {
+    public final String WS_REQUEST_URI = "http://localhost:8080/ws";
 
     /**
      * Get a list of all dealerships
@@ -21,19 +21,19 @@ public class DealershipClient extends WebServiceGatewaySupport {
                 );
     }
 
-    /**
-     * Get number of dealerships
-     * @return GetDealershipCountResponse
-     */
-    public GetDealershipCountResponse getDealershipCount() {
-        GetDealershipCountRequest request = new GetDealershipCountRequest();
-        
-        return (GetDealershipCountResponse)
-                getWebServiceTemplate().marshalSendAndReceive(
-                        WS_REQUEST_URI,
-                        request
-                );
-    }
+//    /**
+//     * Get number of dealerships
+//     * @return GetDealershipCountResponse
+//     */
+//    public GetDealershipCountResponse getDealershipCount() {
+//        GetDealershipCountRequest request = new GetDealershipCountRequest();
+//
+//        return (GetDealershipCountResponse)
+//                getWebServiceTemplate().marshalSendAndReceive(
+//                        WS_REQUEST_URI,
+//                        request
+//                );
+//    }
 
     /**
      * Create a dealership

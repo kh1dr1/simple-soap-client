@@ -1,4 +1,4 @@
-package lt.vikoeif.pi24.simple_soap_client;
+package lt.vikoeif.pi24.simple_soap_client.endpoint;
 
 import org.springframework.boot.webservices.client.WebServiceTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +22,7 @@ public class DealershipConfig {
             This package must match the package configured in the pom.xml.
             This is where JAXB-generated classes live.
          */
-        marshaller.setContextPath("lt.vikoeif.pi24.wsdl");
+        marshaller.setContextPath("lt.viko.eif.pi24.dealership_service.schema");
         return marshaller;
     }
 
@@ -34,15 +34,15 @@ public class DealershipConfig {
      * @return DealershipClient
      */
     @Bean
-    public DealershipClient getDealershipClient(
+    public DealershipEndpointClient getDealershipClient(
             WebServiceTemplateBuilder builder,
             Jaxb2Marshaller marshaller
     ) {
         builder = builder.setMarshaller(marshaller).setUnmarshaller(marshaller);
 
-        DealershipClient client = new DealershipClient();
+        DealershipEndpointClient client = new DealershipEndpointClient();
         client.setWebServiceTemplate(builder.build());
-        client.setDefaultUri("http://localhost:8081/ws/dealerships");
+        client.setDefaultUri("http://localhost:8080/ws");
         return client;
     }
 }
