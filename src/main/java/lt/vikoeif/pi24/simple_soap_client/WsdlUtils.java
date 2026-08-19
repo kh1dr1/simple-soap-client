@@ -1,15 +1,13 @@
 package lt.vikoeif.pi24.simple_soap_client;
 
-import lt.vikoeif.pi24.wsdl.*;
-
-import java.util.List;
+import lt.viko.eif.pi24.dealership_service.schema.*;
 
 public final class WsdlUtils {
 
     /**
      * Convert a Car to a compact, single-line string
-     * @param car WSDL Car object
-     * @return String
+     * @param car XSD Car POJO
+     * @return Car string
      */
     public static String carToString(Car car) {
         return "Car { " + "ID: " +
@@ -22,49 +20,16 @@ public final class WsdlUtils {
     }
 
     /**
-     * Convert a Dealership's Inventory to a verbose, multi-line string
-     * @param inventory WSDL Dealership's Inventory object
-     * @param indentSpaces the amount of spaces to add at the beginning of each line
-     * @return String
-     */
-    public static String dealershipInventoryToString(
-            Dealership.Inventory inventory,
-            int indentSpaces
-    ) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Inventory {").append("\n");
-
-        List<Car> inventoryCars = inventory.getCar();
-        String indent = " ".repeat(indentSpaces);
-
-        for (Car car : inventoryCars) {
-            // Double indent for cars list
-            sb.append(indent).append(indent).append(carToString(car)).append(";\n");
-        }
-
-        // Single indent
-        sb.append(indent).append("}");
-        return sb.toString();
-    }
-
-    /**
      * Convert a Dealership to a verbose, multi-line string
-     * @param dealership WSDL Dealership object
-     * @return String
+     * @param xsdDealership XSD Dealership POJO
+     * @return Dealership string
      */
-    public static String dealershipToString(Dealership dealership) {
-        String inventoryString = "null";
-        Dealership.Inventory dealershipInventory = dealership.getInventory();
-        if (dealershipInventory != null) {
-            inventoryString = dealershipInventoryToString(dealershipInventory, 2);
-        }
-
+    public static String dealershipToString(Dealership xsdDealership) {
         return "Dealership {\n" +
-                "  ID: " + dealership.getId() + ";\n" +
-                "  Name: " + dealership.getName() + ";\n" +
-                "  Location: " + dealership.getLocation() + ";\n" +
-                "  Phone: " + dealership.getPhone() + ";\n" +
-                "  Inventory: " + inventoryString + ";\n" +
+                "  ID: " + xsdDealership.getId() + ";\n" +
+                "  Name: " + xsdDealership.getName() + ";\n" +
+                "  Location: " + xsdDealership.getLocation() + ";\n" +
+                "  Phone: " + xsdDealership.getPhone() + ";\n" +
                 "}";
     }
 }
