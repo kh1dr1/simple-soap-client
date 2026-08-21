@@ -26,11 +26,11 @@ public final class DealershipHtmlGenerator {
     public static String dealershipToHtml(Dealership dealership) throws Exception {
         // 1. Convert Dealership object to XML string
         String xmlString = marshalToXml(dealership);
-        _logger.info("Input XML / before XSLT:\n{}", xmlString);
+        //_logger.info("Input XML / before XSLT:\n{}", xmlString);
 
         // 2. Apply XSLT transformation
         String htmlString = transformXmlToHtml(xmlString);
-        _logger.info("Output HTML / after XSLT:\n{}", htmlString);
+        //_logger.info("Output HTML / after XSLT:\n{}", htmlString);
 
         return htmlString;
     }
