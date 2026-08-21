@@ -35,6 +35,7 @@ public class CreateDealershipServlet extends HttpServlet {
 
         // TODO: check for blank fields
         _logger.info("""
+                \n
                 ===== HTTP POST data =====
                 Dealership name: {}
                 Dealership phone: {}
