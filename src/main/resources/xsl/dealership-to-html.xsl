@@ -25,6 +25,8 @@
 
 <!--                <h2>Inventory</h2>-->
 <!--                <xsl:apply-templates select="deal:inventory"/>-->
+
+                <a href="/">Back to Main</a>
             </body>
         </html>
     </xsl:template>
