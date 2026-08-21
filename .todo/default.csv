@@ -10,5 +10,5 @@ id,description,status,datetime_created,datetime_modified
 9,Add HTML form page for 'getAllCars' operation,completed,Wed Aug 19 22:06:42 2026,Fri Aug 21 16:39:20 2026
 10,Add HTML form page for 'getAllDealerships' operation,completed,Wed Aug 19 22:17:58 2026,Fri Aug 21 16:39:26 2026
 11,Fix HTML XSL transformation (field data is not visible),completed,Fri Aug 21 11:46:58 2026,Fri Aug 21 12:14:40 2026
-12,Remove redundant servlets,pending,Fri Aug 21 12:51:24 2026,Fri Aug 21 12:51:24 2026
+12,Remove redundant servlets,completed,Fri Aug 21 12:51:24 2026,Fri Aug 21 20:59:11 2026
 13,Use Thymeleaf engine instead of Jakarta Servlets,completed,Fri Aug 21 13:53:51 2026,Fri Aug 21 16:38:45 2026
