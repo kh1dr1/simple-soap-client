@@ -57,7 +57,7 @@ public class DealershipController {
         model.addAttribute("phone", phone);
         model.addAttribute("location", location);
 
-        return "dealership-created";
+        return "create-dealership-success";
     }
 
     @GetMapping("/dealerships")
@@ -73,7 +73,7 @@ public class DealershipController {
 
         model.addAttribute("dealerships", dealershipList);
 
-        return "dealerships";
+        return "all-dealerships";
     }
 
     /**

@@ -88,7 +88,7 @@ public class CarController {
         uiModel.addAttribute("price", price);
         uiModel.addAttribute("dealershipId", dealershipId);
 
-        return "car-created";
+        return "create-car-success";
     }
 
     @GetMapping("/cars")
@@ -103,6 +103,6 @@ public class CarController {
 
         model.addAttribute("cars", carList);
 
-        return "cars";
+        return "all-cars";
     }
 }
