@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import lt.viko.eif.pi24.dealership_service.schema.Dealership;
 import lt.viko.eif.pi24.dealership_service.schema.GetDealershipByIdResponse;
+import lt.vikoeif.pi24.simple_soap_client.XsdUtils;
 import lt.vikoeif.pi24.simple_soap_client.endpoint.DealershipEndpointClient;
 import lt.vikoeif.pi24.simple_soap_client.xslgen.DealershipHtmlGenerator;
 
@@ -51,6 +52,7 @@ public class GetDealershipServlet extends HttpServlet {
         }
 
         // Send SOAP request: 'getDealershipById'
+        // TODO: catch SoapFaultClientException exception from 'getDealershipById'
         GetDealershipByIdResponse response = dealershipEndpointClient.getDealershipById(idNumber);
         Dealership dealership = response.getDealership();
 
@@ -64,9 +66,11 @@ public class GetDealershipServlet extends HttpServlet {
         // Convert Dealership XML to HTML with XSL transformation
         String htmlDealership;
         try {
+            _logger.info("Converting a Dealership to HTML via XSLT...");
+            _logger.info("Dealership is:\n{}", XsdUtils.dealershipToString(dealership));
             htmlDealership = DealershipHtmlGenerator.dealershipToHtml(dealership);
         } catch (Exception e) {
-            System.out.println("Cannot convert a Dealership to HTML: " + e.getMessage());
+            _logger.warn("Cannot convert a Dealership to HTML: {}", e.getMessage());
             return;
         }
 
