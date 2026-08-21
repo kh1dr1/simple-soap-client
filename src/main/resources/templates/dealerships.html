@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Dealerships</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <h1>All Dealerships</h1>
+
+    <div th:if="${dealerships.isEmpty()}">
+        <p>No dealerships yet. <a href="/create-dealership">Create one</a></p>
+    </div>
+
+    <ul th:unless="${dealerships.isEmpty()}">
+        <li th:each="dealer : ${dealerships}">
+            <strong th:text="${dealer.name}">Name</strong><br/>
+            Phone: <span th:text="${dealer.phone}">Phone</span><br/>
+            Location: <span th:text="${dealer.location}">Location</span>
+            <hr/>
+        </li>
+    </ul>
+
+    <a href="/create-dealership">Create New</a><br/>
+    <a href="/">Back to Main</a>
+</body>
+
+</html>
