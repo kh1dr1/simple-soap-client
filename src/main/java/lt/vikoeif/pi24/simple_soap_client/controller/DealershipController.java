@@ -76,6 +76,11 @@ public class DealershipController {
         return "dealerships";
     }
 
+    /**
+     * This method handles "get dealership by ID" queries.
+     * @param id URL query parameter, e.g. {@code ?id=1}
+     * @return raw HTML string
+     */
     @GetMapping("/get-dealership")
     @ResponseBody
     public String getDealership(@RequestParam int id) {
@@ -93,5 +98,20 @@ public class DealershipController {
         }
 
         return xsltHtml;
+    }
+
+    @GetMapping("/get-dealership-cars")
+    public String getDealershipCars(
+            @RequestParam int id,
+            Model model
+    ) {
+        GetDealershipCarsResponse response = dealershipEndpointClient.getDealershipCars(id);
+        List<Car> carList = response.getCar();
+
+        model.addAttribute("dealershipId", id);
+        model.addAttribute("cars", carList);
+
+        // HTML page: dealership-cars.html
+        return "dealership-cars";
     }
 }

@@ -52,4 +52,17 @@ public class DealershipEndpointClient extends WebServiceGatewaySupport {
         return (AddDealershipResponse) getWebServiceTemplate()
                 .marshalSendAndReceive(WS_REQUEST_URI, request);
     }
+
+    /**
+     * Get all Cars of a single Dealership.
+     * @param id Dealership ID
+     * @return {@code List<Car>}
+     */
+    public GetDealershipCarsResponse getDealershipCars(int id) {
+        GetDealershipCarsRequest request = new GetDealershipCarsRequest();
+        request.setDealershipId(id);
+
+        return (GetDealershipCarsResponse) getWebServiceTemplate()
+                .marshalSendAndReceive(WS_REQUEST_URI, request);
+    }
 }
