@@ -2,7 +2,6 @@ package lt.vikoeif.pi24.simple_soap_client.xslgen;
 
 import jakarta.xml.bind.JAXBElement;
 
-import lt.vikoeif.pi24.simple_soap_client.Logger;
 import lt.viko.eif.pi24.dealership_service.schema.*;
 
 import javax.xml.namespace.QName;
@@ -12,6 +11,9 @@ import javax.xml.transform.stream.StreamSource;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Marshaller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.io.StringReader;
@@ -19,14 +21,16 @@ import java.io.StringReader;
 public final class DealershipHtmlGenerator {
     public static final String XSL_PATH = "/xsl/dealership-to-html.xsl";
 
+    private static final Logger _logger = LoggerFactory.getLogger(DealershipHtmlGenerator.class);
+
     public static String dealershipToHtml(Dealership dealership) throws Exception {
         // 1. Convert Dealership object to XML string
         String xmlString = marshalToXml(dealership);
-        Logger.logVerboseMessage("Input XML (before XSLT)", xmlString);
+        _logger.info("Input XML / before XSLT:\n{}", xmlString);
 
         // 2. Apply XSLT transformation
         String htmlString = transformXmlToHtml(xmlString);
-        Logger.logVerboseMessage("Transformed XML -> HTML", htmlString);
+        _logger.info("Output HTML / after XSLT:\n{}", htmlString);
 
         return htmlString;
     }
@@ -55,7 +59,8 @@ public final class DealershipHtmlGenerator {
         InputStream xslStream = DealershipHtmlGenerator
                 .class
                 .getResourceAsStream(XSL_PATH);
-        System.out.println("[INFO] XSL file exists: " + (xslStream != null));
+
+        _logger.info("Found XSL transformation file: {}", (xslStream != null));
 
         Source xslSource = new StreamSource(xslStream);
 
