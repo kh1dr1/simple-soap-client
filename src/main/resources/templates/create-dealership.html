@@ -4,23 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Dealership</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
-    <h1>Create a New Dealership</h1>
-    <form action="/create-dealership" method="post">
-        <div>
-            <label>Name: <input type="text" name="name" required/></label>
-        </div>
-        <div>
-            <label>Phone: <input type="text" name="phone"/></label>
-        </div>
-        <div>
-            <label>Location: <input type="text" name="location"/></label>
-        </div>
-        <button type="submit">Create</button>
-    </form>
-    <a href="/">Back to Main</a>
+<h1>Create a New Dealership</h1>
+<form action="/create-dealership" method="post">
+
+    <div class="form-row">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" required>
+    </div>
+
+    <div class="form-row">
+        <label for="phone">Phone:</label>
+        <input type="text" name="phone" id="phone" required>
+    </div>
+
+    <div class="form-row">
+        <label for="location">Location:</label>
+        <input type="text" name="location" id="location" required>
+    </div>
+
+    <button type="submit" class="form-submit-button">Create</button>
+</form>
+<a href="/">Back to Main</a>
 </body>
 
 </html>
