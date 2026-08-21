@@ -9,4 +9,4 @@ id,description,status,datetime_created,datetime_modified
 8,Add HTML form page for 'addCar' operation,pending,Wed Aug 19 22:05:27 2026,Wed Aug 19 22:06:21 2026
 9,Add HTML form page for 'getAllCars' operation,pending,Wed Aug 19 22:06:42 2026,Wed Aug 19 22:06:42 2026
 10,Add HTML form page for 'getAllDealerships' operation,pending,Wed Aug 19 22:17:58 2026,Wed Aug 19 22:17:58 2026
-11,Fix HTML XSL transformation (field data is not visible),pending,Fri Aug 21 11:46:58 2026,Fri Aug 21 11:46:58 2026
+11,Fix HTML XSL transformation (field data is not visible),completed,Fri Aug 21 11:46:58 2026,Fri Aug 21 12:14:40 2026

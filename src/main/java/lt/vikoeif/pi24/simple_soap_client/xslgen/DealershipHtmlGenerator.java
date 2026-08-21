@@ -39,7 +39,7 @@ public final class DealershipHtmlGenerator {
         StringWriter sw = new StringWriter();
 
         // Create a QName (qualified name) for the root element
-        QName qname = new QName("http://your.namespace.com", "dealership");
+        QName qname = new QName("http://eif.viko.lt/dealership-service/schema", "dealership");
 
         // Wrap the object in JAXBElement
         JAXBElement<Dealership> wrapper = new JAXBElement<>(qname, Dealership.class, dealership);
