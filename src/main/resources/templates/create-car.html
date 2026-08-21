@@ -23,17 +23,17 @@
 
     <div class="form-row">
         <label for="brand">Brand:</label>
-        <input type="text" name="brand" id="brand"/>
+        <input type="text" name="brand" id="brand" required/>
     </div>
 
     <div class="form-row">
         <label for="model">Model:</label>
-        <input type="text" name="model" id="model"/>
+        <input type="text" name="model" id="model" required/>
     </div>
 
     <div class="form-row">
         <label for="year">Year:</label>
-        <input type="number" name="year" id="year" min="1900" max="2100"/>
+        <input type="number" name="year" id="year" min="1900" max="2100" required/>
     </div>
 
     <!-- Enum choice -->
@@ -53,12 +53,12 @@
 
     <div class="form-row">
         <label for="price">Price:</label>
-        <input type="number" name="price" id="price" min="0" max="500000000"/>
+        <input type="number" name="price" id="price" min="0" max="500000000" required/>
     </div>
 
     <div class="form-row">
         <label for="dealershipId">Dealership ID:</label>
-        <input type="number" name="dealershipId" id="dealershipId" min="0" max="999"/>
+        <input type="number" name="dealershipId" id="dealershipId" min="1" max="999" required/>
     </div>
 
     <button type="submit" class="form-submit-button">Create</button>
