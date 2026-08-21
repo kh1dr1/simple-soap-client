@@ -12,3 +12,4 @@ id,description,status,datetime_created,datetime_modified
 11,Fix HTML XSL transformation (field data is not visible),completed,Fri Aug 21 11:46:58 2026,Fri Aug 21 12:14:40 2026
 12,Remove redundant servlets,completed,Fri Aug 21 12:51:24 2026,Fri Aug 21 20:59:11 2026
 13,Use Thymeleaf engine instead of Jakarta Servlets,completed,Fri Aug 21 13:53:51 2026,Fri Aug 21 16:38:45 2026
+14,Finish class XsltDealership. Test marshalling with it.,pending,Fri Aug 21 21:53:51 2026,Fri Aug 21 21:53:51 2026
