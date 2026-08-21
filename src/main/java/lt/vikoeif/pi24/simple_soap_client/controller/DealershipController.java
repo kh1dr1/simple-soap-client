@@ -1,5 +1,6 @@
 package lt.vikoeif.pi24.simple_soap_client.controller;
 
+import lt.viko.eif.pi24.dealership_service.schema.AddDealershipResponse;
 import lt.viko.eif.pi24.dealership_service.schema.Dealership;
 import lt.viko.eif.pi24.dealership_service.schema.GetAllDealershipsResponse;
 import lt.vikoeif.pi24.simple_soap_client.endpoint.DealershipEndpointClient;
@@ -36,6 +37,22 @@ public class DealershipController {
             @RequestParam String location,
             Model model) {
 
+        // Create a dealership object
+        Dealership dealership = new Dealership();
+        dealership.setId(0); // ID is set by the database
+        dealership.setName(name);
+        dealership.setPhone(phone);
+        dealership.setLocation(location);
+
+        // Send a SOAP message to the server
+        AddDealershipResponse response = dealershipEndpointClient.addDealership(dealership);
+        if (response.isSuccess()) {
+            _logger.info("Created a new Dealership with ID: {}", dealership.getId());
+        } else {
+            _logger.warn("Cannot create a Dealership");
+        }
+
+        // Assign model data for the returned HTML page model
         model.addAttribute("name", name);
         model.addAttribute("phone", phone);
         model.addAttribute("location", location);
