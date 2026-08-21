@@ -26,7 +26,7 @@ public class DealershipController {
     }
 
     @GetMapping("/create-dealership")
-    public String showForm() {
+    public String createDealership() {
         return "create-dealership"; // Returns create-dealership.html from templates/
     }
 
@@ -77,17 +77,38 @@ public class DealershipController {
     }
 
     /**
+     * Returns a response page with a choice of items list, populated
+     * with a List of all Dealerships.
+     */
+    @GetMapping("/dealership-choice")
+    public String dealershipChoice(Model model) {
+        List<Dealership> dealershipList;
+
+        // Populate the list of dealerships
+        // And send it to the client
+        GetAllDealershipsResponse allDealershipsResponse = dealershipEndpointClient.getAllDealerships();
+        dealershipList = allDealershipsResponse.getDealership();
+        model.addAttribute("dealerships", dealershipList);
+
+        // Return Thymeleaf template: "dealership-choice.html"
+        return "dealership-choice";
+    }
+
+    /**
      * This method handles "get dealership by ID" queries.
-     * @param id URL query parameter, e.g. {@code ?id=1}
+     * @param dealershipId URL query parameter, e.g. {@code ?id=1}
      * @return raw HTML string
      */
-    @GetMapping("/get-dealership")
+    @PostMapping("/dealership-choice")
     @ResponseBody
-    public String getDealership(@RequestParam int id) {
+    public String getDealership(
+            @RequestParam int dealershipId,
+            Model model
+    ) {
 
         // Get a dealership by ID
-        GetDealershipByIdResponse dealershipByIdResponse = dealershipEndpointClient.getDealershipById(id);
-        Dealership dealership = dealershipByIdResponse.getDealership();
+        GetDealershipByIdResponse response = dealershipEndpointClient.getDealershipById(dealershipId);
+        Dealership dealership = response.getDealership();
 
         // Generate HTML via XSLT
         String xsltHtml;

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Get Dealership Info</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+<h1>Get Dealership Info</h1>
+<form action="/dealership-choice" method="post">
+
+    <div th:if="${dealerships.isEmpty()}">
+        <p>No dealerships yet. <a href="/create-dealership">Create one</a></p>
+    </div>
+
+    <!-- Select a Dealership from a List of all Dealerships -->
+    <!-- Dynamically populated Enum choice -->
+    <div class="form-row">
+        <label for="dealershipId">Dealership ID</label>
+        <select name="dealershipId" id="dealershipId">
+            <option value="">--Please choose a Dealership--</option>
+            <option th:each="dealer : ${dealerships}"
+                    th:value="${dealer.id}"
+                    th:text="${dealer.name}">
+                Dealership Name
+            </option>
+        </select>
+    </div>
+
+    <button type="submit" class="form-submit-button">Get Info</button>
+</form>
+<a href="/">Back to Main</a>
+</body>
+
+</html>
