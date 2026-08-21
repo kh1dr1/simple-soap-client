@@ -1,14 +1,14 @@
 id,description,status,datetime_created,datetime_modified
 1,Update SOAP client with new WSDL,completed,Sat Aug 15 15:45:20 2026,Wed Aug 19 20:29:28 2026
-2,"Use Spring MVC Controller instead of a raw servlet for ""addDealership"" (@Controller + @PostMapping)",pending,Sat Aug 15 15:46:11 2026,Sat Aug 15 15:46:11 2026
+2,"Use Spring MVC Controller instead of a raw servlet for ""addDealership"" (@Controller + @PostMapping)",completed,Sat Aug 15 15:46:11 2026,Fri Aug 21 16:38:39 2026
 3,Add XSLT transformation: XML --> PDF,pending,Sat Aug 15 15:46:29 2026,Sat Aug 15 15:46:29 2026
 4,PDF generation with Apache FOP - PDF must have an embedded image,pending,Sat Aug 15 15:46:59 2026,Sat Aug 15 15:46:59 2026
 5,Refactor endpoint classes: Move all code to package 'endpoint',completed,Wed Aug 19 21:17:50 2026,Wed Aug 19 21:24:16 2026
-6,Delete old Logger class. Use slf4j framework.,pending,Wed Aug 19 21:19:09 2026,Wed Aug 19 21:19:09 2026
+6,Delete old Logger class. Use slf4j framework.,completed,Wed Aug 19 21:19:09 2026,Fri Aug 21 16:40:32 2026
 7,Delete class 'WsdlUtils' - it is useless,deleted,Wed Aug 19 21:54:29 2026,Wed Aug 19 22:18:31 2026
-8,Add HTML form page for 'addCar' operation,pending,Wed Aug 19 22:05:27 2026,Wed Aug 19 22:06:21 2026
-9,Add HTML form page for 'getAllCars' operation,pending,Wed Aug 19 22:06:42 2026,Wed Aug 19 22:06:42 2026
-10,Add HTML form page for 'getAllDealerships' operation,pending,Wed Aug 19 22:17:58 2026,Wed Aug 19 22:17:58 2026
+8,Add HTML form page for 'addCar' operation,completed,Wed Aug 19 22:05:27 2026,Fri Aug 21 16:39:03 2026
+9,Add HTML form page for 'getAllCars' operation,completed,Wed Aug 19 22:06:42 2026,Fri Aug 21 16:39:20 2026
+10,Add HTML form page for 'getAllDealerships' operation,completed,Wed Aug 19 22:17:58 2026,Fri Aug 21 16:39:26 2026
 11,Fix HTML XSL transformation (field data is not visible),completed,Fri Aug 21 11:46:58 2026,Fri Aug 21 12:14:40 2026
 12,Remove redundant servlets,pending,Fri Aug 21 12:51:24 2026,Fri Aug 21 12:51:24 2026
-13,Use Thymeleaf engine instead of Jakarta Servlets,pending,Fri Aug 21 13:53:51 2026,Fri Aug 21 13:53:51 2026
+13,Use Thymeleaf engine instead of Jakarta Servlets,completed,Fri Aug 21 13:53:51 2026,Fri Aug 21 16:38:45 2026
