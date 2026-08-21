@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import lt.viko.eif.pi24.dealership_service.schema.Dealership;
 import lt.viko.eif.pi24.dealership_service.schema.GetDealershipByIdResponse;
+import lt.vikoeif.pi24.simple_soap_client.HtmlFormUtils;
 import lt.vikoeif.pi24.simple_soap_client.XsdUtils;
 import lt.vikoeif.pi24.simple_soap_client.endpoint.DealershipEndpointClient;
 import lt.vikoeif.pi24.simple_soap_client.xslgen.DealershipHtmlGenerator;
@@ -14,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class GetDealershipServlet extends HttpServlet {
     private static final Logger _logger = LoggerFactory.getLogger(GetDealershipServlet.class);
@@ -31,37 +33,24 @@ public class GetDealershipServlet extends HttpServlet {
     ) throws IOException {
 
         // Get URL parameters
-        String dealershipId = req.getParameter("id");
-
-        if (dealershipId == null || dealershipId.isBlank()) {
+        Optional<Integer> maybeIntId = HtmlFormUtils.parseIntFormInput(req.getParameter("id"));
+        if (maybeIntId.isEmpty()) {
             resp.sendError(400, "Missing dealership ID"); // HTTP 400 Bad Request
             return;
         }
-
-        int idNumber;
-        try {
-            idNumber = Integer.parseInt(dealershipId);
-        } catch (NumberFormatException e) {
-            System.out.println(
-                    "[error] Dealership ID value " +
-                    dealershipId +
-                    " is not a parsable number"
-            );
-            resp.sendError(400, "Malformed dealership ID");
-            return;
-        }
+        int idValue = maybeIntId.get();
 
         // Send SOAP request: 'getDealershipById'
         // TODO: catch SoapFaultClientException exception from 'getDealershipById'
-        GetDealershipByIdResponse response = dealershipEndpointClient.getDealershipById(idNumber);
+        GetDealershipByIdResponse response = dealershipEndpointClient.getDealershipById(idValue);
         Dealership dealership = response.getDealership();
 
         if (dealership == null) {
-            _logger.warn("There is no Dealership with ID={}", idNumber);
+            _logger.warn("There is no Dealership with ID={}", idValue);
             return;
         }
 
-        _logger.info("Received a Dealership with ID={}", idNumber);
+        _logger.info("Received a Dealership with ID={}", idValue);
 
         // Convert Dealership XML to HTML with XSL transformation
         String htmlDealership;

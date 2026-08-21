@@ -33,6 +33,7 @@ public class CreateDealershipServlet extends HttpServlet {
         String dealershipPhone = req.getParameter("phone");
         String dealershipLocation = req.getParameter("location");
 
+        // TODO: check for blank fields
         _logger.info("""
                 ===== HTTP POST data =====
                 Dealership name: {}
