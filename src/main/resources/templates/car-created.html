@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Car Created</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+<h1>Car Created!</h1>
+<p>Information:</p>
+<ul>
+    <li>Status: <span th:text="${status}">Status</span></li>
+    <li>Brand: <span th:text="${brand}">Brand</span></li>
+    <li>Model: <span th:text="${model}">Model</span></li>
+    <li>Year: <span th:text="${year}">Year</span></li>
+    <li>Color: <span th:text="${color}">Color</span></li>
+    <li>Price: <span th:text="${price}">Price</span></li>
+    <li>Dealership ID: <span th:text="${dealershipId}">Dealership ID</span></li>
+</ul>
+<a href="/create-car">Create Another</a>
+<a href="/">Back to Main</a>
+</body>
+
+</html>

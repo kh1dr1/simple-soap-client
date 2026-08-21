@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Cars</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+<h1>All Cars</h1>
+
+<div th:if="${cars.isEmpty()}">
+    <p>No cars yet. <a href="/create-car">Create one</a></p>
+</div>
+
+<ul th:unless="${cars.isEmpty()}">
+    <li th:each="car : ${cars}">
+        <strong th:text="|${car.brand} ${car.model}|">Name</strong><br/>
+        Status: <span th:text="${car.status}">Status</span><br/>
+        Year: <span th:text="${car.year}">Year</span><br/>
+        Color: <span th:text="${car.color}">Color</span><br/>
+        Price: <span th:text="${car.price}">Price</span><br/>
+        Dealership ID: <span th:text="${car.dealershipId}">Dealership ID</span>
+        <hr/>
+    </li>
+</ul>
+
+<a href="/create-car">Create New</a><br/>
+<a href="/">Back to Main</a>
+</body>
+
+</html>
