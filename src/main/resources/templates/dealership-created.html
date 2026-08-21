@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Dealership Created</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+<h1>Dealership Created!</h1>
+<p>Information:</p>
+<ul>
+    <li>Name: <span th:text="${name}">Name</span></li>
+    <li>Phone: <span th:text="${phone}">Phone</span></li>
+    <li>Location: <span th:text="${location}">Location</span></li>
+</ul>
+<a href="/create-dealership">Create Another</a>
+<a href="/">Back to Main</a>
+</body>
+
+</html>

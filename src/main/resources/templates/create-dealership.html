@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create Dealership</title>
+    <style>
+        body { font-family: Arial,sans-serif; padding: 20px; }
+        a { display: block; margin: 50px 0; font-size: 18px; }
+
+        /* CSS class for form input boxes */
+        .form-row {
+            margin-bottom: 10px;
+        }
+        .form-row label {
+            display: inline-block;
+            width: 80px; /* Fixed width for alignment */
+        }
+        .form-row input {
+            display: inline-block;
+        }
+
+        /* CSS class for form Submit button */
+        .form-submit-button {
+            margin-top: 10px;
+        }
+        .form-submit-button input {
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Create a New Dealership</h1>
+    <form action="/create-dealership" method="post">
+        <div>
+            <label>Name: <input type="text" name="name" required/></label>
+        </div>
+        <div>
+            <label>Phone: <input type="text" name="phone"/></label>
+        </div>
+        <div>
+            <label>Location: <input type="text" name="location"/></label>
+        </div>
+        <button type="submit">Create</button>
+    </form>
+    <a href="/">Back to Main</a>
+</body>
+
+</html>
