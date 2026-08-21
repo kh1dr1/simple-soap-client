@@ -1,4 +1,4 @@
-package lt.vikoeif.pi24.simple_soap_client.xslgen;
+package lt.vikoeif.pi24.simple_soap_client.xslt;
 
 import jakarta.xml.bind.JAXBElement;
 

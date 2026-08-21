@@ -2,7 +2,7 @@ package lt.vikoeif.pi24.simple_soap_client.controller;
 
 import lt.viko.eif.pi24.dealership_service.schema.*;
 import lt.vikoeif.pi24.simple_soap_client.endpoint.DealershipEndpointClient;
-import lt.vikoeif.pi24.simple_soap_client.xslgen.DealershipHtmlGenerator;
+import lt.vikoeif.pi24.simple_soap_client.xslt.DealershipHtmlGenerator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
