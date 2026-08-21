@@ -1,9 +1,8 @@
 package lt.vikoeif.pi24.simple_soap_client.controller;
 
-import lt.viko.eif.pi24.dealership_service.schema.AddDealershipResponse;
-import lt.viko.eif.pi24.dealership_service.schema.Dealership;
-import lt.viko.eif.pi24.dealership_service.schema.GetAllDealershipsResponse;
+import lt.viko.eif.pi24.dealership_service.schema.*;
 import lt.vikoeif.pi24.simple_soap_client.endpoint.DealershipEndpointClient;
+import lt.vikoeif.pi24.simple_soap_client.xslgen.DealershipHtmlGenerator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -74,5 +74,24 @@ public class DealershipController {
         model.addAttribute("dealerships", dealershipList);
 
         return "dealerships";
+    }
+
+    @GetMapping("/get-dealership")
+    @ResponseBody
+    public String getDealership(@RequestParam int id) {
+
+        // Get a dealership by ID
+        GetDealershipByIdResponse dealershipByIdResponse = dealershipEndpointClient.getDealershipById(id);
+        Dealership dealership = dealershipByIdResponse.getDealership();
+
+        // Generate HTML via XSLT
+        String xsltHtml;
+        try {
+            xsltHtml = DealershipHtmlGenerator.dealershipToHtml(dealership);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return xsltHtml;
     }
 }
