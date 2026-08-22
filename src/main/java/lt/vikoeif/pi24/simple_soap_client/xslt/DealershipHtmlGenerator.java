@@ -23,20 +23,29 @@ public final class DealershipHtmlGenerator {
 
     private static final Logger _logger = LoggerFactory.getLogger(DealershipHtmlGenerator.class);
 
-    public static String dealershipToHtml(Dealership dealership) throws Exception {
+    /**
+     * Transforms a Dealership to an XML string.
+     * @param dealership a dealership POJO of type {@code XsltDealership}
+     * @return XML string
+     * @throws Exception in case of error
+     */
+    public static String dealershipToHtml(XsltDealership dealership) throws Exception {
         // 1. Convert Dealership object to XML string
         String xmlString = marshalToXml(dealership);
-        //_logger.info("Input XML / before XSLT:\n{}", xmlString);
+        _logger.info("Input XML / before XSLT:\n{}", xmlString);
 
         // 2. Apply XSLT transformation
         String htmlString = transformXmlToHtml(xmlString);
-        //_logger.info("Output HTML / after XSLT:\n{}", htmlString);
+        _logger.info("Output HTML / after XSLT:\n{}", htmlString);
 
         return htmlString;
     }
 
-    private static String marshalToXml(Dealership dealership) throws Exception {
-        JAXBContext context = JAXBContext.newInstance(Dealership.class);
+    private static String marshalToXml(XsltDealership dealership) throws Exception {
+
+        // Bind Classes to JAXB Context
+        JAXBContext context = JAXBContext.newInstance(XsltDealership.class, Car.class);
+
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
@@ -46,7 +55,7 @@ public final class DealershipHtmlGenerator {
         QName qname = new QName("http://eif.viko.lt/dealership-service/schema", "dealership");
 
         // Wrap the object in JAXBElement
-        JAXBElement<Dealership> wrapper = new JAXBElement<>(qname, Dealership.class, dealership);
+        JAXBElement<XsltDealership> wrapper = new JAXBElement<>(qname, XsltDealership.class, dealership);
 
         // Marshal the wrapped object
         marshaller.marshal(wrapper, sw);

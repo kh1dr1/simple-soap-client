@@ -3,6 +3,7 @@ package lt.vikoeif.pi24.simple_soap_client.controller;
 import lt.viko.eif.pi24.dealership_service.schema.*;
 import lt.vikoeif.pi24.simple_soap_client.endpoint.DealershipEndpointClient;
 import lt.vikoeif.pi24.simple_soap_client.xslt.DealershipHtmlGenerator;
+import lt.vikoeif.pi24.simple_soap_client.xslt.XsltDealership;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -107,13 +108,30 @@ public class DealershipController {
     ) {
 
         // Get a dealership by ID
-        GetDealershipByIdResponse response = dealershipEndpointClient.getDealershipById(dealershipId);
+        GetDealershipByIdResponse response = dealershipEndpointClient
+                .getDealershipById(dealershipId);
         Dealership dealership = response.getDealership();
+
+        // Convert Dealership -> XsltDealership
+        XsltDealership xsltDealership = new XsltDealership();
+        xsltDealership.setId(dealership.getId());
+        xsltDealership.setName(dealership.getName());
+        xsltDealership.setLocation(dealership.getLocation());
+        xsltDealership.setPhone(dealership.getPhone());
+
+        // Populate Dealership inventory
+        GetDealershipCarsResponse dealershipCarsResponse = dealershipEndpointClient
+                .getDealershipCars(dealershipId);
+        List<Car> dealershipCarList = dealershipCarsResponse.getCar();
+        for (Car car : dealershipCarList) {
+            xsltDealership.addCarToInventory(car);
+        }
+        _logger.info("Added {} cars to a XsltDealership", dealershipCarList.size());
 
         // Generate HTML via XSLT
         String xsltHtml;
         try {
-            xsltHtml = DealershipHtmlGenerator.dealershipToHtml(dealership);
+            xsltHtml = DealershipHtmlGenerator.dealershipToHtml(xsltDealership);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
